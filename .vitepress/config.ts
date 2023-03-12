@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import pkg from '../package.json'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -19,23 +20,47 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: '始于前端，但不止于前端',
     logo: '/logo.png',
-    nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
-    ],
-
-    sidebar: [
-      {
-        text: 'Examples',   
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
-      }
-    ],
-
+    nav: nav(),
+    sidebar: {
+      '/source/': sidebarSourceAnalysis(),
+    },
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
     ]
   }
 })
+
+function nav() {
+  return [
+    {
+      text: '源码分析',
+      link: '/source/index',
+      activeMatch: '/source/'
+    },
+    {
+      text: pkg.version,
+      items: [
+        {
+          text: 'Docs',
+          link: 'https://github.com/lnden/docs'
+        },
+        {
+          text: 'Github',
+          link: 'https://github.com/lnden'
+        }
+      ]
+    }
+  ]
+}
+
+function sidebarSourceAnalysis() {
+  return [
+    {
+      text: 'Source code analysis',
+      items: [
+        { text: 'ni', link: '/source/ni' },
+        { text: 'ejs', link: '/source/ejs' },
+      ]
+    }
+  ]
+}
